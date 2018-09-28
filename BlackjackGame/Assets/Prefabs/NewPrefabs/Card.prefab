@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011545709936}
   - component: {fileID: 65529524076886836}
+  - component: {fileID: 114303420381025732}
   m_Layer: 0
   m_Name: Card
   m_TagString: objectCard
@@ -69,15 +70,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012878200392}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.9, y: 8.65, z: 1.31}
+  m_LocalRotation: {x: 0.70710653, y: -0.00066627807, z: -0.70710653, w: -0.0006665429}
+  m_LocalPosition: {x: 3.9, y: 0.25, z: 1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224021253716879392}
   - {fileID: 224000012483185472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 180.108, y: 90, z: -0.000015258789}
 --- !u!23 &23000013352987220
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -93,7 +94,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7f78aaf1720875746853d1223b82081c, type: 2}
+  - {fileID: 2100000, guid: db232105dcf884adaa7b39028cf5ac3c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +129,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7f78aaf1720875746853d1223b82081c, type: 2}
+  - {fileID: 2100000, guid: db232105dcf884adaa7b39028cf5ac3c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,6 +199,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114303420381025732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012878200392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d2ef40debc447b4f9de9b6aabed2a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 1000012878200392}
 --- !u!224 &224000012483185472
 RectTransform:
   m_ObjectHideFlags: 1

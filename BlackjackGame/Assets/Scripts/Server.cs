@@ -15,14 +15,14 @@ public class Server : MonoBehaviour
     private bool serverStarted;
     private int port = 6321;
     private int playersReady = 0;
-    private Deck deck;
+    private DeckServer deck;
     private int playerInTurn = 10;
     private int currentCard = 0;
 
     // Use this for initialization
     void Start()
     {
-        deck = new Deck();
+        deck = new DeckServer();
         this.observers = new List<Observer>();
         this.disconnectList = new List<Observer>();
 

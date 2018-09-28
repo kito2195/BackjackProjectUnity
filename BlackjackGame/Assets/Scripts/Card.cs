@@ -1,132 +1,82 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public class Card
 {
+    private int value;
+    private string symbol; // handles de Ace, Jack, Queen and King
+    private string suit;
+    private string imagePath;
 
-    //elements of a card
-    private string cardSymbol;
-    private int cardValue;
-    private string cardSuit;
-    private Texture cardTexture;
-
-    //constructor with parameters
-    public Card(int value, int suit, Texture cardTexture)
+    public Card(int pValue, string pSymbol, string pSuit)
     {
-        if (value > 10)
-        {
-            value = 10;
-        }
-        if (value == 1)
-        {
-            value = 11;
-        }
-        this.cardValue = value;
-        this.cardSymbol = makeSymbol(this.cardValue);
-        this.cardSuit = makeSuit(suit);
-        this.cardTexture = cardTexture;
+        this.value = pValue;
+        this.symbol = pSymbol;
+        this.suit = pSuit;
     }
 
-    public string makeSymbol(int value)
+    public Card(int pValue, string pSuit)
     {
-        string newSymbol = "";
-
-        if (value > 1 && value < 11)
-        {
-            newSymbol = "" + value;
-        }
-        else if (value == 1)
-        {
-            newSymbol = "A";
-        }
-        else if (value == 11)
-        {
-            newSymbol = "J";
-        }
-        else if (value == 12)
-        {
-            newSymbol = "Q";
-        }
-        else if (value == 13)
-        {
-            newSymbol = "K";
-        }
-
-        return newSymbol;
+        this.value = pValue;
+        this.symbol = "None";
+        this.suit = pSuit;
     }
 
-    /*
-    * This method receive an int (1, 2, 3, 4)
-    * This numbers means each suit of a card
-    * 2 = Clubs, 4 = Spades, 1 = Hearts and 3 = Diamonds
-    * Finally, it returns a corresponding symbol for each suit
-    */
-    public string makeSuit(int suit)
+    public int getValue()
     {
-        string newSuit = "";
-
-        if (suit == 1)
-        {
-            newSuit = "♥";
-        }
-        else if (suit == 2)
-        {
-            newSuit = "♣";
-        }
-        else if (suit == 3)
-        {
-            newSuit = "♦";
-        }
-        else if (suit == 4)
-        {
-            newSuit = "♠";
-        }
-
-        return newSuit;
+        return this.value;
     }
 
-    //get method for the fields
-
-    //get for cardSynbol
-    public string CardSymbol
+    public string getSymbol()
     {
-        get
-        {
-            return this.cardSymbol;
-        }
+        return this.symbol;
     }
 
-    //get for cardValue
-    public int CardValue
+    public string getSuit()
     {
-        get
-        {
-            return this.cardValue;
-        }
+        return this.suit;
     }
 
-    //get for cardSuit
-    public string CardSuit
+    public void setSuit(string pSuit)
     {
-        get
-        {
-            return this.cardSuit;
-        }
+        this.suit = pSuit;
     }
 
-    //get for cardMaterial
-    public Texture CardTexture
+    public void setValue(int pValue)
     {
-        get
-        {
-            return this.cardTexture;
-        }
+        this.value = pValue;
     }
 
-
-    public void setCardValue(int newValue)
+    public void setSymbol(string pSymbol)
     {
-        this.cardValue = newValue;
+        this.symbol = pSymbol;
+    }
+
+    public void changeValue(int pValue) // to change the Ace value
+    {
+        this.value = pValue;
+    }
+
+    public void setImagePath(string cardName)
+    {
+        this.imagePath = cardName;
+    }
+
+    public string getImagePath()
+    {
+        return this.imagePath;
+    }
+
+    public string getCardName()
+    {
+        string res = "";
+        switch (this.symbol)
+        {
+            case "None": //Is not an Ace, then
+                res = this.value + " of " + this.suit;
+                break;
+            default: // is an Ace
+                res = this.symbol + " of " + this.suit;
+                break;
+        }
+        return res;
     }
 }

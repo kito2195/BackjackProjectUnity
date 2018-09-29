@@ -12,14 +12,14 @@ public class ObjectCard : MonoBehaviour
 
     public void SetCard(Card pCard)
     {
-        this.value = pCard.getValue(); // sets the value of the logical card to the object
-        this.symbol = pCard.getSymbol(); // sets the symbol of the logical card to the object
-        this.suit = pCard.getSuit(); // sets the suit of the logical card to the object
-        this.imagePath = pCard.getImagePath();
+        this.value = pCard.Value; // sets the value of the logical card to the object
+        this.symbol = pCard.Symbol; // sets the symbol of the logical card to the object
+        this.suit = pCard.Suit; // sets the suit of the logical card to the object
+        this.imagePath = pCard.ImagePath;
 
         // set the correct texture to the child(0) of the prefab (front face of the card)
         this.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetTexture("_MainTex", getTexture());
-        this.transform.name = pCard.getCardName();
+        this.transform.name = pCard.GetCardName();
     }
 
     // fetches the correct texture according to logical card values

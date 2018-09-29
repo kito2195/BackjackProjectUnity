@@ -1,82 +1,61 @@
 ﻿
 public class Card
 {
-    private int value;
-    private string symbol; // handles de Ace, Jack, Queen and King
-    private string suit;
-    private string imagePath;
+    public int Value { get; set; }
+    public string Symbol { get; set; }
+    public string Suit { get; set; }
+    public string ImagePath { get; set; }
 
     public Card(int pValue, string pSymbol, string pSuit)
     {
-        this.value = pValue;
-        this.symbol = pSymbol;
-        this.suit = pSuit;
+        this.Value = pValue;
+        this.Symbol = pSymbol;
+        this.Suit = pSuit;
+    }
+
+    //constructor to deserialize from a logical card
+    public Card(string cardToDeserilze)
+    {
+        string[] atrrCard = cardToDeserilze.Split(',');
+        this.Value = int.Parse(atrrCard[0]);
+        this.Symbol = atrrCard[1];
+        this.Suit = atrrCard[2];
+        this.ImagePath = atrrCard[3];
     }
 
     public Card(int pValue, string pSuit)
     {
-        this.value = pValue;
-        this.symbol = "None";
-        this.suit = pSuit;
+        this.Value = pValue;
+        this.Symbol = "None";
+        this.Suit = pSuit;
     }
 
-    public int getValue()
+    public void ChangeValue(int pValue) // to change the Ace value
     {
-        return this.value;
+        this.Value = pValue;
     }
 
-    public string getSymbol()
-    {
-        return this.symbol;
-    }
-
-    public string getSuit()
-    {
-        return this.suit;
-    }
-
-    public void setSuit(string pSuit)
-    {
-        this.suit = pSuit;
-    }
-
-    public void setValue(int pValue)
-    {
-        this.value = pValue;
-    }
-
-    public void setSymbol(string pSymbol)
-    {
-        this.symbol = pSymbol;
-    }
-
-    public void changeValue(int pValue) // to change the Ace value
-    {
-        this.value = pValue;
-    }
-
-    public void setImagePath(string cardName)
-    {
-        this.imagePath = cardName;
-    }
-
-    public string getImagePath()
-    {
-        return this.imagePath;
-    }
-
-    public string getCardName()
+    public string GetCardName()
     {
         string res = "";
-        switch (this.symbol)
+        switch (this.Symbol)
         {
             case "None": //Is not an Ace, then
-                res = this.value + " of " + this.suit;
+                res = this.Value + " of " + this.Suit;
                 break;
             default: // is an Ace
-                res = this.symbol + " of " + this.suit;
+                res = this.Symbol + " of " + this.Suit;
                 break;
         }
         return res;
     }
+
+    /*
+     * It takes all the properties of the class and returns it like a string separate with a comma
+     */
+    public string SerializeCardToString()
+    {
+        return this.Value.ToString() + "," + this.Symbol + "," + this.Suit + "," + this.ImagePath;
+    }
+
 }

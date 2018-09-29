@@ -27,7 +27,6 @@ public class Game : MonoBehaviour
     public List<Text> playersBlackjackBet;
     public Text turnText;
     public float moveSpeed;
-    public Transform deckPosition;
     public Transform[] fieldsPosition;
     public GameObject cardPrefab;
     public GameObject askForACardButton;
@@ -61,12 +60,14 @@ public class Game : MonoBehaviour
     private bool hideAnotherRoundWindow;
     private const int totalCards = 52;
     private int currentPlayerPosition;
-    private List<Card> deck = new List<Card>();
     private List<Card> cardsDealed = new List<Card>();
     private List<int> casinoCards = new List<int>();
     private List<int> player1Cards = new List<int>();
     private List<int> player2Cards = new List<int>();
     private List<int> player3Cards = new List<int>();
+
+    //tmp new functionality
+    private Stack<Card> cardToInstante = new Stack<Card>(); // pile with the 52 cards
 
     // Use this for initialization
     void Start()
@@ -130,7 +131,6 @@ public class Game : MonoBehaviour
                     cardsToDeal[currentCard].transform.position = Vector3.MoveTowards(cardsToDeal[currentCard].transform.position, fieldsPosition[currentCard].position, moveSpeed * Time.deltaTime);
                 }
             }
-
         }
 
     }
@@ -187,46 +187,33 @@ public class Game : MonoBehaviour
             }
             i++;
         }
+        cardToInstante.Reverse();
         dealCards();
     }
 
     //creates a card from a logical card, and asign that card to one player
     public void createCard(string logicalCard, int player)
     {
-        string material = "";
-        int i = 0;
-        while (logicalCard[i].ToString() != " ")
-        {
-            material = material + logicalCard[i].ToString();
-            i++;
-        }
-        i++;
-        string suit = logicalCard[i].ToString();
-        i = i + 2;
-        string number = "";
-        while (logicalCard[i].ToString() != " ")
-        {
-            number = number + logicalCard[i].ToString();
-            i++;
-        }
-        Card newCard = new Card(int.Parse(number), int.Parse(suit), GetCardTexture(number, int.Parse(suit)));
+
+        Card newCard = new Card(logicalCard);
         if (player == 0)
         {
-            this.player1Cards.Add(newCard.CardValue);
+            this.player1Cards.Add(newCard.Value);
         }
         else if (player == 1)
         {
-            this.player2Cards.Add(newCard.CardValue);
+            this.player2Cards.Add(newCard.Value);
         }
         else if (player == 2)
         {
-            this.player3Cards.Add(newCard.CardValue);
+            this.player3Cards.Add(newCard.Value);
         }
         else if (player == -1)
         {
-            this.casinoCards.Add(newCard.CardValue);
+            this.casinoCards.Add(newCard.Value);
         }
-        deck.Add(newCard);
+        cardToInstante.Push(newCard);
+
     }
 
     public void turnChange(string name, int number)
@@ -381,8 +368,8 @@ public class Game : MonoBehaviour
         int gain = 0;
         if (playersBlackjackBet[player].text != "")
         {
-            int card1 = this.cardsDealed[0].CardValue;
-            int card2 = this.cardsDealed[1].CardValue;
+            int card1 = this.cardsDealed[0].Value;
+            int card2 = this.cardsDealed[1].Value;
             int playerBlackjackBet = getPlayerBlackjackBet(player);
             if ((card1 + card2) == 21)
             {
@@ -449,7 +436,7 @@ public class Game : MonoBehaviour
             doubleBetButton.GetComponent<Button>().interactable = true;
         }
         
-        if (cardsDealed[1].CardValue == 11 || cardsDealed[1].CardValue == 10)
+        if (cardsDealed[1].Value == 11 || cardsDealed[1].Value == 10)
         {
             if (playerCoinsLeft > 0)
             {
@@ -558,17 +545,23 @@ public class Game : MonoBehaviour
         int i = 0;
         while (i < totalPlayers * 2)
         {
-            GameObject card = Instantiate(cardPrefab, deckPosition.position, deckPosition.rotation);
+            //reference the position of the deck
+            Transform deckPosition = GameObject.Find("Deck").GetComponent<Transform>();
+            GameObject card = (GameObject)Instantiate(Resources.Load("Prefabs/Card"), deckPosition.position, deckPosition.rotation);
             card.transform.Rotate(0, -90, 0);
-            card.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetTexture("_MainTex", deck.ElementAt(0).CardTexture);
-            //eliminate the card in the deck, ONLY TO TEST - We need to create a better functionality to manage this card in the table 
-            //for example, create a list with the cards in use 
-            Card removed = deck[0];
+            // generates the Card prefab
+            ObjectCard tmpCard = card.GetComponent<ObjectCard>();
+            // set the logicalCard values to the prefab object   
+            Card removed = cardToInstante.Pop();
+            tmpCard.gameObject.GetComponent<ObjectCard>().SetCard(removed);
+            //add the current to an a list to manage the card in the game 
             cardsDealed.Add(removed);
-            deck.RemoveAt(0);
+            //add the prefab to move the card from deckposition to cardposition
             cardsToDeal.Add(card);
             i++;
         }
+        //clear the pile to avoid any error
+        cardToInstante.Clear();
     }
 
 
@@ -584,13 +577,23 @@ public class Game : MonoBehaviour
         this.bet21Button.GetComponent<Button>().interactable = false;
         this.doubleBetButton.GetComponent<Button>().interactable = false;
         createCard(logicalCard, player);
-        GameObject card = Instantiate(cardPrefab, deckPosition.position, deckPosition.rotation);
+
+        //reference the position of the deck
+        Transform deckPosition = GameObject.Find("Deck").GetComponent<Transform>();
+        GameObject card = (GameObject)Instantiate(Resources.Load("Prefabs/Card"), deckPosition.position, deckPosition.rotation);
         card.transform.Rotate(0, -90, 0);
-        card.transform.GetChild(0).GetComponent<MeshRenderer>().material.SetTexture("_MainTex", deck.ElementAt(0).CardTexture); 
-        Card removed = deck[0];
+        // generates the Card prefab
+        ObjectCard tmpCard = card.GetComponent<ObjectCard>();
+        // set the logicalCard values to the prefab object   
+        Card removed = cardToInstante.Pop();
+        tmpCard.gameObject.GetComponent<ObjectCard>().SetCard(removed);
+        //add the current to an a list to manage the card in the game 
         cardsDealed.Add(removed);
-        deck.RemoveAt(0);
+        //add the prefab to move the card from deckposition to cardposition
         cardsToDeal.Add(card);
+        //clear the pile to avoid any error
+        cardToInstante.Clear();
+
         List<Transform> variable = fieldsPosition.ToList();
         int positionExtraCard = 3 + (player * 2);
         variable.Add(fieldsPosition[positionExtraCard]);

@@ -7,12 +7,12 @@ using System;
 public class Deck
 {
     private Stack<Card> logicalDeck; // pile with the 52 cards
-    private Stack<ObjectCard> ObjecCardtDump; // pile that handles the Dump of cards 
+    //private Stack<ObjectCard> ObjecCardtDump; // pile that handles the Dump of cards 
 
     private List<Card> toShuffleDeck; // list to shuffle the deck, then add it to the pile (logicalDeck)    
 
-    private float size; // to handle the locaScale Y position (increase it), for the new card (prefab) created
-    private float thicknessOfACard; // variable to handle the thickness of the card 3Dobject
+    //private float size; // to handle the locaScale Y position (increase it), for the new card (prefab) created
+    //private float thicknessOfACard; // variable to handle the thickness of the card 3Dobject
 
     /*
     public GameObject objectDeck; // 3DObject Deck
@@ -24,10 +24,10 @@ public class Deck
     {
         // initates variables
         logicalDeck = new Stack<Card>();
-        ObjecCardtDump = new Stack<ObjectCard>();
+        //ObjecCardtDump = new Stack<ObjectCard>();
         toShuffleDeck = new List<Card>();
-        size = 53f; // quantity of cards in deck plus one
-        thicknessOfACard = 0.00943f; // thikness of the prefab "card"
+        //size = 53f; // quantity of cards in deck plus one
+        //thicknessOfACard = 0.00943f; // thikness of the prefab "card"
         FillDeck(); // starts a new filled and shuffled deck
     }
 
@@ -50,40 +50,45 @@ public class Deck
                 switch (j) // assigned the special symbol (ace, jack, queen or king)
                 {
                     case 1:
-                        tempCard.setSymbol(symbol[0]); // symbol[0] == ace
+                        tempCard.Symbol = symbol[0]; // symbol[0] == ace
                         break;
                     case 11:
-                        tempCard.setSymbol(symbol[1]); // symbol[1] == jack
+                        tempCard.Symbol = symbol[1]; // symbol[1] == jack
                         break;
                     case 12:
-                        tempCard.setSymbol(symbol[2]); // symbol[2] == queen
+                        tempCard.Symbol = symbol[2]; // symbol[2] == queen
                         break;
                     case 13:
-                        tempCard.setSymbol(symbol[3]); // symbol[3] == king
+                        tempCard.Symbol = symbol[3]; // symbol[3] == king
                         break;
                     default:
                         break;
                 }
 
-                if (tempCard.getValue() >= 2 && tempCard.getValue() <= 13)
+                if (tempCard.Value >= 2 && tempCard.Value <= 13)
                 {  // handles the "2-13 _of_suit"
-                    path = tempCard.getValue().ToString() + "_of_" + tempCard.getSuit().ToString();
+                    path = tempCard.Value.ToString() + "_of_" + tempCard.Suit.ToString();
                 }
                 else // handles the "ace_of_suit"
                 {
-                    path = tempCard.getSymbol().ToString() + "_of_" + tempCard.getSuit().ToString();
+                    path = tempCard.Symbol.ToString() + "_of_" + tempCard.Suit.ToString();
                 }
 
-                tempCard.setImagePath(path); // set the path to the card 
+                tempCard.ImagePath = path; // set the path to the card 
 
                 if (j >= 11) // handles the special black jack deck, for the jack, queen and king the value is 10
                 {
-                    tempCard.changeValue(10);
+                    tempCard.ChangeValue(10);
+                }
+                if (j == 1)
+                {
+                    tempCard.ChangeValue(11);
                 }
 
                 toShuffleDeck.Add(tempCard); // adds the card to a List, in order to shuffle the List       
             }
         }
+
         int index = 0;
         while (toShuffleDeck.Count > 0) // shuffle the List and adds the cards to the stack (logicalDeck)
         {
@@ -94,9 +99,9 @@ public class Deck
         // variable (Stack) 'logicalDeck' is now filled and shuffled
     }
 
-    void takeACard() // pops a card from the Deck and displays it on the Dump
+    public Card TakeACard() // pops a card from the Deck and displays it on the Dump
     {
-        Card logicalCard = this.logicalDeck.Pop(); // gets a card from the Deck        
+        return this.logicalDeck.Pop(); // gets a card from the Deck        
         /*ObjectCard tempCard;
 
         float rotationY = UnityEngine.Random.Range(75f, 110f); // random 'rotation Y' parameter, "natural" drop of the card
@@ -115,13 +120,13 @@ public class Deck
 
     }
 
-    void animationTakeACard(float thicknessOfACard) // animation of taking a card from the deck (reduces the Scale Y of the deck)
+    /*void animationTakeACard(float thicknessOfACard) // animation of taking a card from the deck (reduces the Scale Y of the deck)
     {
         objectDeck.transform.localScale = (objectDeck.transform.localScale - new Vector3(0, thicknessOfACard, 0));
-    }
+    }*/
 
 
-    void OnMouseDown() // handles interaction with the 3Dobject Deck when is touched
+    /*void OnMouseDown() // handles interaction with the 3Dobject Deck when is touched
     {
         if (logicalDeck.Count > 0) // check the size of the logical deck
         {
@@ -133,5 +138,5 @@ public class Deck
         {
             print("Deck is empty");
         }
-    }
+    }*/
 }

@@ -15,14 +15,14 @@ public class Server : MonoBehaviour
     private bool serverStarted;
     private int port = 6321;
     private int playersReady = 0;
-    private DeckServer deck;
+    private Deck deck;
     private int playerInTurn = 10;
-    private int currentCard = 0;
+    private List<Card> casinoCards;
 
     // Use this for initialization
     void Start()
     {
-        deck = new DeckServer();
+        deck = new Deck();
         this.observers = new List<Observer>();
         this.disconnectList = new List<Observer>();
 
@@ -206,15 +206,28 @@ public class Server : MonoBehaviour
         yield return new WaitForSeconds(1);
         List<string> data = new List<string>();
         data.Add("4");
-        while (this.currentCard < 8)
+        //to put 8 cards into a list and send it to the clients
+        for (int i = 0; i < 8; i++)
         {
-            data.Add(this.deck.getDeck()[this.currentCard]);
-            this.currentCard = this.currentCard + 1;
+            //validate if the cards are for the casino
+            if (i == 0 || i == 1)
+            {
+                Card tmpCard = deck.TakeACard();
+                data.Add(tmpCard.SerializeCardToString());
+                //save it into a separate array (it's 'cause the casino plays in the server)
+                casinoCards.Add(tmpCard);
+            }
+            else
+            {
+                data.Add(deck.TakeACard().SerializeCardToString());
+            }
+
         }
         broadcast(data, null);
         yield return new WaitForSeconds(5);
         turn();
     }
+
     //Changes the turns between all the players
     private void turn()
     {
@@ -255,8 +268,7 @@ public class Server : MonoBehaviour
         List<string> data = new List<string>();
         data.Add(type);
         data.Add(player);
-        data.Add(this.deck.getDeck()[this.currentCard]);
-        this.currentCard = this.currentCard + 1;
+        data.Add(deck.TakeACard().SerializeCardToString());
         broadcast(data, null);
     }
 
@@ -270,36 +282,42 @@ public class Server : MonoBehaviour
     //The casino plays his hand
     private void casinoTurn()
     {
-        int casinoCard1 = getLogicalCardValue(deck.getDeck()[0]);
-        int casinoCard2 = getLogicalCardValue(deck.getDeck()[1]);
+        int casinoCard1 = casinoCards[0].Value;
+        int casinoCard2 = casinoCards[1].Value;
         int count = casinoCard1 + casinoCard2;
         List<string> data = new List<string>();
+        //9 = it means the action is for the casino's turn
         data.Add("9");
+        //if the casino's hand is greater than 16, the casino's turn ends
         if (count > 16)
         {
+            //0 = ask 0 cards
             data.Add("0");
             broadcast(data, null);
         }
         else
         {
-            List<string> casinoCards = new List<string>();
-            casinoCards.Add(deck.getDeck()[0]);
-            casinoCards.Add(deck.getDeck()[1]);
+            //it saves the current cards of the casino and the extra cards
+            List<string> casinoTotalsCards = new List<string>();
+            casinoTotalsCards.Add(casinoCards[0].SerializeCardToString());
+            casinoTotalsCards.Add(casinoCards[1].SerializeCardToString());
+            //this is for put the information in the message, like to say: casino takes 3 cards
             int extraCardAmount = 0;
+            //to save the position if the casino's hand is greater than 21
             int i = 0;
             while (count < 17)
             {
-                int newCard = getLogicalCardValue(this.deck.getDeck()[this.currentCard]);
-                casinoCards.Add(this.deck.getDeck()[this.currentCard]);
-                this.currentCard = this.currentCard + 1;
+                Card tmpCard = deck.TakeACard();
+                int newCard = tmpCard.Value;
+                casinoTotalsCards.Add(tmpCard.SerializeCardToString());
                 count += newCard;
                 extraCardAmount++;
 
                 if (count > 21)
                 {
-                    while (i < casinoCards.Count)
+                    while (i < casinoTotalsCards.Count)
                     {
-                        if (getLogicalCardValue(casinoCards[i]) == 11)
+                        if (getLogicalCardValue(casinoTotalsCards[i]) == 11)
                         {
                             count -= 10;
                             i++;
@@ -310,9 +328,9 @@ public class Server : MonoBehaviour
                 }
             }
             data.Add(extraCardAmount.ToString());
-            for (int j = 2; j < casinoCards.Count; j++)
+            for (int j = 2; j < casinoTotalsCards.Count; j++)
             {
-                data.Add(casinoCards[j]);
+                data.Add(casinoTotalsCards[j]);
             }
             broadcast(data, null);
         }

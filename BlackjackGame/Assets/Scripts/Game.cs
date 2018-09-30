@@ -33,7 +33,6 @@ public class Game : MonoBehaviour
     public GameObject bet21Button;
     public GameObject doubleBetButton;
     public GameObject passButton;
-    public Material[] allCardMaterials;
     public List<Transform> coinsPositions;
     public GameObject coinPrefab_100;
     public GameObject coinPrefab_500;
@@ -67,7 +66,7 @@ public class Game : MonoBehaviour
     private List<int> player3Cards = new List<int>();
 
     //tmp new functionality
-    private Stack<Card> cardToInstante = new Stack<Card>(); // pile with the 52 cards
+    private List<Card> cardToInstante = new List<Card>(); // pile with the 52 cards
 
     // Use this for initialization
     void Start()
@@ -79,7 +78,7 @@ public class Game : MonoBehaviour
         hideInitialBetWindow = true;
         hideBlackjackBetWindow = true;
         hideAnotherRoundWindow = true;
-        askForACardButton.GetComponent<Button>().onClick.AddListener(askForExtraCard);
+        askForACardButton.GetComponent<Button>().onClick.AddListener(AskForExtraCard);
         askForACardButton.GetComponent<Button>().interactable = false;
         bet21Button.GetComponent<Button>().onClick.AddListener(betFor21);
         bet21Button.GetComponent<Button>().interactable = false;
@@ -187,8 +186,7 @@ public class Game : MonoBehaviour
             }
             i++;
         }
-        cardToInstante.Reverse();
-        dealCards();
+        DealCards();
     }
 
     //creates a card from a logical card, and asign that card to one player
@@ -212,7 +210,7 @@ public class Game : MonoBehaviour
         {
             this.casinoCards.Add(newCard.Value);
         }
-        cardToInstante.Push(newCard);
+        cardToInstante.Add(newCard);
 
     }
 
@@ -252,7 +250,7 @@ public class Game : MonoBehaviour
     {
         foreach (string card in casinoExtraCards)
         {
-            recieveExtraCard(-1, card, false);
+            RecieveExtraCard(-1, card, false);
             updatePlayersHandsCount(true);
             yield return new WaitForSeconds(2);
         }
@@ -539,7 +537,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    void dealCards()
+    void DealCards()
     {
         //put the initial cards to deal in the deck position
         int i = 0;
@@ -551,8 +549,11 @@ public class Game : MonoBehaviour
             card.transform.Rotate(0, -90, 0);
             // generates the Card prefab
             ObjectCard tmpCard = card.GetComponent<ObjectCard>();
+            ReduceThicknessOfDeck();
             // set the logicalCard values to the prefab object   
-            Card removed = cardToInstante.Pop();
+            Card removed = cardToInstante[0];
+            //delete the card from the array
+            cardToInstante.RemoveAt(0);
             tmpCard.gameObject.GetComponent<ObjectCard>().SetCard(removed);
             //add the current to an a list to manage the card in the game 
             cardsDealed.Add(removed);
@@ -564,15 +565,21 @@ public class Game : MonoBehaviour
         cardToInstante.Clear();
     }
 
+    private void ReduceThicknessOfDeck() // animation of taking a card from the deck (reduces the Scale Y of the deck)
+    {
+        GameObject objectDeck = GameObject.Find("Deck");
+        objectDeck.transform.localScale = (objectDeck.transform.localScale - new Vector3(0, 0.00943f, 0));
+    }
+
 
     //Asks the server for an extra card  
-    void askForExtraCard()
+    void AskForExtraCard()
     {
         this.askForACard.Invoke();
     }
 
     //Recieves an extra card for one player and put it in the table
-    public void recieveExtraCard(int player, string logicalCard, bool turnChange)
+    public void RecieveExtraCard(int player, string logicalCard, bool turnChange)
     {
         this.bet21Button.GetComponent<Button>().interactable = false;
         this.doubleBetButton.GetComponent<Button>().interactable = false;
@@ -584,8 +591,11 @@ public class Game : MonoBehaviour
         card.transform.Rotate(0, -90, 0);
         // generates the Card prefab
         ObjectCard tmpCard = card.GetComponent<ObjectCard>();
+        ReduceThicknessOfDeck();
         // set the logicalCard values to the prefab object   
-        Card removed = cardToInstante.Pop();
+        Card removed = cardToInstante[0];
+        //delete the card from the array
+        cardToInstante.RemoveAt(0);
         tmpCard.gameObject.GetComponent<ObjectCard>().SetCard(removed);
         //add the current to an a list to manage the card in the game 
         cardsDealed.Add(removed);
@@ -673,7 +683,7 @@ public class Game : MonoBehaviour
         int bet = getPlayerBet(player);
         bet = bet * 2;
         this.playersBets[player].text = "Bet: " + bet.ToString();
-        recieveExtraCard(player, card, false);
+        RecieveExtraCard(player, card, false);
         if(this.currentPlayerPosition == player)
         {
             int currentCoins = int.Parse(this.playersCoins[player].text);
@@ -748,7 +758,7 @@ public class Game : MonoBehaviour
 		while (i < coinsOfPlayer.Count) {
             if (coinsOfPlayer [i] == 100) {
                 Vector3 vectTemp_100 = new Vector3(this.coinsPositions[positionOfCoins].position.x, this.coinsPositions[positionOfCoins].position.y + inc_100, this.coinsPositions[positionOfCoins].position.z);
-                GameObject coin = Instantiate (coinPrefab_100,vectTemp_100, this.coinsPositions[positionOfCoins].rotation);
+                Instantiate (coinPrefab_100,vectTemp_100, this.coinsPositions[positionOfCoins].rotation);
 				inc_100 += 0.04f;
 			} 
 			else if (coinsOfPlayer [i] == 500) {
@@ -759,7 +769,7 @@ public class Game : MonoBehaviour
 			}
 			else if (coinsOfPlayer [i] == 1000) {
                 Vector3 vectTemp_1000 = new Vector3(this.coinsPositions[positionOfCoins].position.x + 0.40f, this.coinsPositions[positionOfCoins].position.y + inc_1000, this.coinsPositions[positionOfCoins].position.z);
-                GameObject coin = Instantiate (coinPrefab_1000, vectTemp_1000, this.coinsPositions[positionOfCoins].rotation);
+                Instantiate (coinPrefab_1000, vectTemp_1000, this.coinsPositions[positionOfCoins].rotation);
 				inc_1000 += 0.04f;
 			}
 			i++;

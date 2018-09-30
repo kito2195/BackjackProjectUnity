@@ -100,6 +100,7 @@ public class Client : MonoBehaviour
         }
         catch (Exception e)
         {
+            print(e.Message); 
         }
     }
 

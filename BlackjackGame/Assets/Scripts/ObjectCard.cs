@@ -8,8 +8,6 @@ public class ObjectCard : MonoBehaviour
     private string suit;
     private string imagePath;
 
-    public GameObject card;
-
     public void SetCard(Card pCard)
     {
         this.value = pCard.Value; // sets the value of the logical card to the object
@@ -25,18 +23,6 @@ public class ObjectCard : MonoBehaviour
     // fetches the correct texture according to logical card values
     private Texture getTexture()
     {
-        /*
-        string cardImage = ""; // temp texture path
-
-        if (this.value >= 2 && this.value <= 13)
-        {  // handles the "2-13 _of_suit"
-            cardImage = (this.value.ToString() + "_of_" + this.suit.ToString());
-        }
-        else // handles the "ace_of_suit"
-        {
-            cardImage = (this.symbol.ToString() + "_of_" + this.suit.ToString());
-        } 
-        */
         string cardImage = this.imagePath;
         // creates and returns the texture
         Texture cardTexture = Resources.Load("Textures/AllCards/" + cardImage, typeof(Texture)) as Texture; // get the texture from assets                                 

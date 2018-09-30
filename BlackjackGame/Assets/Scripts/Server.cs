@@ -23,6 +23,7 @@ public class Server : MonoBehaviour
     void Start()
     {
         deck = new Deck();
+        casinoCards = new List<Card>();
         this.observers = new List<Observer>();
         this.disconnectList = new List<Observer>();
 

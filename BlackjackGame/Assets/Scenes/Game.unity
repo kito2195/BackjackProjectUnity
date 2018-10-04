@@ -185,6 +185,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
     type: 2}
   m_PrefabInternal: {fileID: 1578007229}
+--- !u!1 &31275617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 31275620}
+  - component: {fileID: 31275619}
+  - component: {fileID: 31275618}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!81 &31275618
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 31275617}
+  m_Enabled: 1
+--- !u!20 &31275619
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 31275617}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.01
+  far clip plane: 1000
+  field of view: 58.27
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &31275620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 31275617}
+  m_LocalRotation: {x: 0, y: 0.9314692, z: -0.36382025, w: 0}
+  m_LocalPosition: {x: -0.71, y: 13.97, z: 15.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 42.67, y: 180, z: 0}
 --- !u!1001 &40665359
 Prefab:
   m_ObjectHideFlags: 0
@@ -222,7 +299,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 89793ce4416a95a4e82d3a67c9059619, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 89793ce4416a95a4e82d3a67c9059619, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1074,7 +1151,7 @@ GameObject:
   - component: {fileID: 141097842}
   - component: {fileID: 141097841}
   m_Layer: 5
-  m_Name: Bet 21 Button
+  m_Name: Bet21Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1174,83 +1251,6 @@ RectTransform:
   m_AnchoredPosition: {x: -14.718646, y: -211.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &205992787
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 205992790}
-  - component: {fileID: 205992789}
-  - component: {fileID: 205992788}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &205992788
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 205992787}
-  m_Enabled: 1
---- !u!20 &205992789
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 205992787}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.01
-  far clip plane: 1000
-  field of view: 58.27
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 0
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &205992790
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 205992787}
-  m_LocalRotation: {x: 0, y: 0.9314692, z: -0.36382025, w: 0}
-  m_LocalPosition: {x: -0.71, y: 13.97, z: 15.84}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 42.67, y: 180, z: 0}
 --- !u!1001 &212905864
 Prefab:
   m_ObjectHideFlags: 0
@@ -2312,11 +2312,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1294526361520244, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_Name
-      value: blackjackFieldLeft
+      value: blackjackField1
       objectReference: {fileID: 0}
     - target: {fileID: 23245815903433776, guid: 612085372e37a124a9a03e08d6eb69bc,
         type: 2}
@@ -2391,7 +2391,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1294526361520244, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_Name
-      value: chipFieldPlayerLeft
+      value: chipFieldPlayer1
       objectReference: {fileID: 0}
     - target: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_LocalScale.y
@@ -2785,7 +2785,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1294526361520244, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_Name
-      value: chipFieldPlayerRight
+      value: chipFieldPlayer3
       objectReference: {fileID: 0}
     - target: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_LocalScale.y
@@ -3249,7 +3249,7 @@ GameObject:
   - component: {fileID: 568512576}
   - component: {fileID: 568512575}
   m_Layer: 5
-  m_Name: Player 1 Coins
+  m_Name: Player1Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3324,7 +3324,7 @@ GameObject:
   - component: {fileID: 571290862}
   - component: {fileID: 571290861}
   m_Layer: 5
-  m_Name: Player 2 Bet
+  m_Name: Player2Bet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3425,11 +3425,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1294526361520244, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_Name
-      value: blackjackFieldCenter
+      value: blackjackField2
       objectReference: {fileID: 0}
     - target: {fileID: 23245815903433776, guid: 612085372e37a124a9a03e08d6eb69bc,
         type: 2}
@@ -3831,7 +3831,7 @@ GameObject:
   - component: {fileID: 662861932}
   - component: {fileID: 662861931}
   m_Layer: 5
-  m_Name: Player 1
+  m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3935,7 +3935,7 @@ Transform:
   - {fileID: 689791254}
   - {fileID: 1106773709}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689791253
 GameObject:
@@ -4459,7 +4459,7 @@ GameObject:
   - component: {fileID: 882001410}
   - component: {fileID: 882001409}
   m_Layer: 5
-  m_Name: Player 3
+  m_Name: Player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4749,7 +4749,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 205992789}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
@@ -5567,7 +5567,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1080009976
 MonoBehaviour:
@@ -6053,7 +6053,7 @@ GameObject:
   - component: {fileID: 1164807169}
   - component: {fileID: 1164807168}
   m_Layer: 5
-  m_Name: 'Player 3 Bet '
+  m_Name: Player3Bet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6182,7 +6182,7 @@ GameObject:
   - component: {fileID: 1175909483}
   - component: {fileID: 1175909482}
   m_Layer: 5
-  m_Name: Player 1 Bet
+  m_Name: Player1Bet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6306,7 +6306,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1219380981
 GameObject:
@@ -7407,7 +7407,7 @@ GameObject:
   - component: {fileID: 1381442832}
   - component: {fileID: 1381442833}
   m_Layer: 5
-  m_Name: Turn Text
+  m_Name: TurnText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7987,11 +7987,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1294526361520244, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_Name
-      value: blackjackFieldRight
+      value: blackjackField3
       objectReference: {fileID: 0}
     - target: {fileID: 23245815903433776, guid: 612085372e37a124a9a03e08d6eb69bc,
         type: 2}
@@ -8037,7 +8037,7 @@ GameObject:
   - component: {fileID: 1470936161}
   - component: {fileID: 1470936160}
   m_Layer: 5
-  m_Name: Pass Button
+  m_Name: PassButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8235,7 +8235,7 @@ GameObject:
   - component: {fileID: 1536402040}
   - component: {fileID: 1536402039}
   m_Layer: 5
-  m_Name: Player 3 Coins
+  m_Name: Player3Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8537,7 +8537,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 43.1, y: -187.36, z: 0}
 --- !u!1 &1576674497
 GameObject:
@@ -8614,7 +8614,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1294526361520244, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_Name
-      value: chipFieldPlayerCenter
+      value: chipFieldPlayer2
       objectReference: {fileID: 0}
     - target: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
       propertyPath: m_LocalScale.y
@@ -9229,7 +9229,7 @@ GameObject:
   - component: {fileID: 1843878589}
   - component: {fileID: 1843878588}
   m_Layer: 5
-  m_Name: Ask For A Card Button
+  m_Name: AskForACardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9504,7 +9504,7 @@ GameObject:
   - component: {fileID: 1903313685}
   - component: {fileID: 1903313684}
   m_Layer: 5
-  m_Name: Double Bet Button
+  m_Name: DoubleBetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9693,7 +9693,7 @@ GameObject:
   - component: {fileID: 1918163221}
   - component: {fileID: 1918163220}
   m_Layer: 5
-  m_Name: Player 2
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10243,7 +10243,7 @@ GameObject:
   - component: {fileID: 2041857835}
   - component: {fileID: 2041857834}
   m_Layer: 5
-  m_Name: Player 2 Coins
+  m_Name: Player2Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10604,5 +10604,5 @@ Transform:
   - {fileID: 1353902310}
   - {fileID: 1758411254}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

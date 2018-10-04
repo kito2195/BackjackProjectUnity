@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public static class Player
 {
@@ -11,7 +11,7 @@ public static class Player
     public static string Nickname { get; set; }
     public static int CoinsAmount { get; set; }
     public static int GamesWon { get; set; }
-    public static int GameCoins
+    public static int CoinsInGame
     {
         get
         {
@@ -20,17 +20,20 @@ public static class Player
         set
         {
             s_gameCoins = value;
-            CoinsAmount -= GameCoins;
+            CoinsAmount -= CoinsInGame;
         }
     }
+    public static string NicknameToConsult { get; set; }
+    public static int PlayerPosition { get; set; }
 
     //server fields
     private static readonly string securityPassword = "BlackjackTEAM3";
     private static readonly string facadeServer = "http://localhost/DatabaseBlackjack/php/FacadeBlackjack.php";
-    public static string NicknameToConsult { get; set; }
+    
     //the response of the server consult, this field is used in the session screen to know the status of the consult
     public static string playerResponse;
     private static int s_gameCoins;
+    
 
     /*
      * Load the player information from the server, this method make a request to the server and get the user 

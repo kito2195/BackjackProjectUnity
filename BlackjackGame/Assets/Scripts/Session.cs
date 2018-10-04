@@ -36,7 +36,7 @@ public class Session : MonoBehaviour {
             if (this.intCoinsToGame <= Player.CoinsAmount)
             {
                 //When the coin amount for the next game is correct (doesn´t overstep the total coin amount), it moves to the next scene, the game scene
-                Player.GameCoins = this.intCoinsToGame;
+                Player.CoinsInGame = this.intCoinsToGame;
                 this.errorText.text = "";
                 this.coinsToGame.GetComponent<InputField>().text = "";
                 SceneManager.LoadScene("Game");

@@ -20,23 +20,11 @@ public class BlackjckBetReady : UnityEvent<int>
 public class Game : MonoBehaviour
 {
     //public fields
-    public List<Text> playerNames;
-    public List<Text> playersCoins;
-    public List<Text> playersBets;
-    public List<Text> playersHandCount;
-    public List<Text> playersBlackjackBet;
-    public Text turnText;
     public float moveSpeed;
     public Transform[] fieldsPosition;
     public GameObject cardPrefab;
-    public GameObject askForACardButton;
-    public GameObject bet21Button;
-    public GameObject doubleBetButton;
-    public GameObject passButton;
-    public List<Transform> coinsPositions;
-    public GameObject coinPrefab_100;
-    public GameObject coinPrefab_500;
-    public GameObject coinPrefab_1000;
+  
+
     public InitialBetReady betReady;
     public UnityEvent passTurnEvent;
     public UnityEvent askForACard;
@@ -44,19 +32,9 @@ public class Game : MonoBehaviour
     public BlackjckBetReady blackjackBetReady;
 
     //private fields
-    private string playerInitialBet;
-    private int initialBetValue;
-    private string playerBlackjackBet;
-    private int blackjackBet;
     private int currentCard;
     private int totalPlayers = 4;
-    private List<GameObject> cardsToDeal;
-    private Rect initialBetWindow = new Rect(100, 100, 400, 200);
-    private Rect blackjackBetWindow = new Rect(100, 100, 400, 200);
-    private Rect anotherRoundWindow = new Rect(100, 100, 400, 200);
-    private bool hideInitialBetWindow;
-    private bool hideBlackjackBetWindow;
-    private bool hideAnotherRoundWindow;
+    private List<GameObject> cardsToDeal; 
     private const int totalCards = 52;
     private int currentPlayerPosition;
     private List<Card> cardsDealed = new List<Card>();
@@ -71,21 +49,8 @@ public class Game : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerInitialBet = "";
-        playerBlackjackBet = "";
         cardsToDeal = new List<GameObject>();
         currentCard = 0;
-        hideInitialBetWindow = true;
-        hideBlackjackBetWindow = true;
-        hideAnotherRoundWindow = true;
-        askForACardButton.GetComponent<Button>().onClick.AddListener(AskForExtraCard);
-        askForACardButton.GetComponent<Button>().interactable = false;
-        bet21Button.GetComponent<Button>().onClick.AddListener(betFor21);
-        bet21Button.GetComponent<Button>().interactable = false;
-        doubleBetButton.GetComponent<Button>().onClick.AddListener(askFordoubleBet);
-        doubleBetButton.GetComponent<Button>().interactable = false;
-        passButton.GetComponent<Button>().onClick.AddListener(passTurn);
-        passButton.GetComponent<Button>().interactable = false;
     }
 
     // Update is called once per frame
@@ -130,18 +95,17 @@ public class Game : MonoBehaviour
                     cardsToDeal[currentCard].transform.position = Vector3.MoveTowards(cardsToDeal[currentCard].transform.position, fieldsPosition[currentCard].position, moveSpeed * Time.deltaTime);
                 }
             }
-        }
-
+        }    
     }
 
-    public void putAPlayerInTheTable(int position, string remotePlayer)
+    public void PutAPlayerInTheTable(int position, string remotePlayer)
     {
         //Puts the local player in the table
         if (remotePlayer == null)
         {
             this.currentPlayerPosition = position;
             this.playerNames[position].text = Player.Nickname;
-            this.playersCoins[position].text = Player.GameCoins.ToString();
+            this.playersCoins[position].text = Player.CoinsInGame.ToString();
         }
         //Puts a remote player in the table
         else
@@ -155,11 +119,6 @@ public class Game : MonoBehaviour
     {
         this.playersBets[position].text = "Bet: " + bet;
         DealCoins(position, int.Parse(bet));
-    }
-
-    public void activateInitialBet()
-    {
-        hideInitialBetWindow = false;
     }
 
     //Recieves a logical card with format material+suit+number and turns them into Card objects and put them in the table
@@ -422,120 +381,9 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void activateButtons()
-    {
-        passButton.GetComponent<Button>().interactable = true;
-        askForACardButton.GetComponent<Button>().interactable = true;
-        int playerCoinsLeft = int.Parse(this.playersCoins[this.currentPlayerPosition].text);
-        int playerBet = getPlayerBet(this.currentPlayerPosition);
-
-        if (playerCoinsLeft >= playerBet)
-        {
-            doubleBetButton.GetComponent<Button>().interactable = true;
-        }
-        
-        if (cardsDealed[1].Value == 11 || cardsDealed[1].Value == 10)
-        {
-            if (playerCoinsLeft > 0)
-            {
-                bet21Button.GetComponent<Button>().interactable = true;
-            }
-        }
-    }
-
-    private void deactivateButtons()
-    {
-        askForACardButton.GetComponent<Button>().interactable = false;
-        doubleBetButton.GetComponent<Button>().interactable = false;
-        passButton.GetComponent<Button>().interactable = false;
-        bet21Button.GetComponent<Button>().interactable = false;
-    }
-
-    //to manage the pop up initial bet
-    void OnGUI()
-    {
-        if (!hideInitialBetWindow)
-        {
-            initialBetWindow = GUI.Window(0, initialBetWindow, doInitialBetWindow, "Initial Bet");
-        }
-        if (!hideBlackjackBetWindow)
-        {
-            blackjackBetWindow = GUI.Window(1, blackjackBetWindow, doBlackjackBetWindow, "Blackjack Bet");
-        }
-        if (!hideAnotherRoundWindow)
-        {
-            anotherRoundWindow = GUI.Window(1, anotherRoundWindow, doAnotherRoundWindow, "Another round?");
-        }
-
-    }
-    /*
-     * This window asks for the player initial bet
-     */
-
-    void doInitialBetWindow(int windowID)
-    {
-        GUI.Label(new Rect(25, 20, 390, 60), "Please, insert your initial bet in the next field and press Start Button! to continue.");
-        GUI.Label(new Rect(25, 65, 100, 30), "Initial Bet: ");
-        playerInitialBet = GUI.TextField(new Rect(130, 65, 200, 25), playerInitialBet, 25);
-
-        if (GUI.Button(new Rect(290, 170, 100, 20), "Start Button!"))
-        {
-            //validate if the input is a number
-            if (int.TryParse(playerInitialBet, out initialBetValue))
-            {
-                int playerCoins = int.Parse(playersCoins[this.currentPlayerPosition].text);
-
-                if (initialBetValue <= playerCoins)
-                {
-
-                    playersBets[this.currentPlayerPosition].text = "Bet: " + playerInitialBet;
-                    playersCoins[this.currentPlayerPosition].text = (playerCoins - initialBetValue).ToString();
-                    hideInitialBetWindow = true;
-                    DealCoins(this.currentPlayerPosition, initialBetValue);
-                    this.betReady.Invoke(initialBetValue);
-                }
-            }
-        }
-    }
-    //Window that asks for the secondary bet (bet the house has blackjack)
-    void doBlackjackBetWindow(int windowID)
-    {
-        GUI.Label(new Rect(25, 20, 390, 60), "Please, insert your secondary bet in the next field and press Start Button! to continue.");
-        GUI.Label(new Rect(25, 65, 100, 30), "Secondary Bet: ");
-        playerBlackjackBet = GUI.TextField(new Rect(130, 65, 200, 25), playerBlackjackBet, 25);
-        if (GUI.Button(new Rect(290, 170, 100, 20), "Start Button!"))
-        {
-            //validate if the input is a number
-            if (int.TryParse(playerBlackjackBet, out blackjackBet))
-            {
-                int playerCoins = int.Parse(playersCoins[this.currentPlayerPosition].text);
-
-                if (blackjackBet <= (initialBetValue/2) && blackjackBet <= int.Parse(this.playersCoins[this.currentPlayerPosition].text))
-                {
-                    playersBlackjackBet[this.currentPlayerPosition].text = "BJ Bet: " + blackjackBet;
-                    playersCoins[this.currentPlayerPosition].text = (playerCoins - blackjackBet).ToString();
-                    hideBlackjackBetWindow = true;
-                    DealCoins(this.currentPlayerPosition + 3, blackjackBet);
-                    this.blackjackBetReady.Invoke(blackjackBet);
-                    deactivateButtons();
-                    activateButtons();
-                }
-            }
-        }
-    }
-
-    void doAnotherRoundWindow(int windowID)
-    {
-        new Rect(25, 65, 100, 30);
-        if (GUI.Button(new Rect(50, 65, 80, 30), "Yes"))
-        {
-            this.hideAnotherRoundWindow = true;
-        }
-        if (GUI.Button(new Rect(300, 65, 80, 30), "No"))
-        {
-            this.hideAnotherRoundWindow = true;
-        }
-    }
+   
+  
+    
 
     void DealCards()
     {
@@ -572,11 +420,7 @@ public class Game : MonoBehaviour
     }
 
 
-    //Asks the server for an extra card  
-    void AskForExtraCard()
-    {
-        this.askForACard.Invoke();
-    }
+   
 
     //Recieves an extra card for one player and put it in the table
     public void RecieveExtraCard(int player, string logicalCard, bool turnChange)
@@ -656,14 +500,7 @@ public class Game : MonoBehaviour
         passTurn();
     }
 
-    /*
-     * This method lets one player to bet that the house or casino has blackjack in its initial hand
-     * This method is only allowed when the face up card of the house is a 10, J, Q, K or an A
-     */
-    public void betFor21()
-    {
-        hideBlackjackBetWindow = false;
-    }
+    
 
     public void recieveRemoteBlackjackBet(int player, string blackjackBet)
     {
@@ -671,11 +508,7 @@ public class Game : MonoBehaviour
         DealCoins(player + 3,int.Parse(blackjackBet));
     }
 
-    //Asks the server for a new card, double the bet and pass the turn
-    public void askFordoubleBet()
-    {
-        this.doubleBetEvent.Invoke();
-    }
+    
 
     //Doubles de bet of the player and changes the turn
     public void doubleBet(int player, string card)
@@ -716,63 +549,4 @@ public class Game : MonoBehaviour
         int finalNumber = int.Parse(stringNumber);
         return finalNumber;
     }
-
-    public void passTurn()
-    {
-        deactivateButtons();
-        this.passTurnEvent.Invoke();
-    }
-
-	public void DealCoins(int positionOfCoins, int betPlayer){
-        List<int> coinsOfPlayer = new List<int>();
-		while (betPlayer > 0) {
-            if (betPlayer >= 2000)
-            {
-                coinsOfPlayer.Add(1000);
-                betPlayer -= 1000;
-            }
-            else if (betPlayer > 500)
-            {
-                coinsOfPlayer.Add(500);
-                betPlayer -= 500;
-            }
-            else if(betPlayer >= 100)
-            {
-                coinsOfPlayer.Add(100);
-                betPlayer -= 100;
-            }
-            else
-            {
-                betPlayer = 0;
-            }
-		}
-		MakeCoins(positionOfCoins,coinsOfPlayer);
-	}
-
-	public void MakeCoins(int positionOfCoins, List<int> coinsOfPlayer){
-		int i = 0;
-		float inc_100 = 0.04f;
-		float inc_500 = 0.04f;
-		float inc_1000 = 0.04f;
-
-		while (i < coinsOfPlayer.Count) {
-            if (coinsOfPlayer [i] == 100) {
-                Vector3 vectTemp_100 = new Vector3(this.coinsPositions[positionOfCoins].position.x, this.coinsPositions[positionOfCoins].position.y + inc_100, this.coinsPositions[positionOfCoins].position.z);
-                Instantiate (coinPrefab_100,vectTemp_100, this.coinsPositions[positionOfCoins].rotation);
-				inc_100 += 0.04f;
-			} 
-			else if (coinsOfPlayer [i] == 500) {
-                Vector3 vectTemp_500 = new Vector3(this.coinsPositions[positionOfCoins].position.x - 0.40f, this.coinsPositions[positionOfCoins].position.y + inc_500, this.coinsPositions[positionOfCoins].position.z);
-                GameObject coin = Instantiate (coinPrefab_500, vectTemp_500, this.coinsPositions[positionOfCoins].rotation);
-                coin.transform.Rotate(new Vector3(180,0,0));
-				inc_500 += 0.04f;
-			}
-			else if (coinsOfPlayer [i] == 1000) {
-                Vector3 vectTemp_1000 = new Vector3(this.coinsPositions[positionOfCoins].position.x + 0.40f, this.coinsPositions[positionOfCoins].position.y + inc_1000, this.coinsPositions[positionOfCoins].position.z);
-                Instantiate (coinPrefab_1000, vectTemp_1000, this.coinsPositions[positionOfCoins].rotation);
-				inc_1000 += 0.04f;
-			}
-			i++;
-		}
-	}
 }

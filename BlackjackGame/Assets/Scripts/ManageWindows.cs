@@ -51,7 +51,7 @@ public class ManageWindows : MonoBehaviour
     /*
     * This window asks for the player initial bet
     */
-    void DoInitialBetWindow(int windowID)
+   void DoInitialBetWindow(int windowID)
     {
         //create the labels and the texfield in the window
         GUI.Label(new Rect(25, 20, 390, 60), "Please, insert your initial bet in the next field and press Start Button! to continue.");
@@ -67,8 +67,8 @@ public class ManageWindows : MonoBehaviour
 
                 if (initialBetValue <= playerCoins)
                 {
-                    PlayersFields.playersBets[Player.PlayerPosition].text = "Bet: " + playerInitialBet;
-                    PlayersFields.playersCoins[Player.PlayerPosition].text = (playerCoins - initialBetValue).ToString();
+                    PlayersFields.PlayersBets[Player.PlayerPosition].text = "Bet: " + playerInitialBet;
+                    PlayersFields.PlayersCoins[Player.PlayerPosition].text = (playerCoins - initialBetValue).ToString();
                     showInitialBetWindow = false;
                     DealCoins(Player.PlayerPosition, initialBetValue);
                     this.betReady.Invoke(initialBetValue);

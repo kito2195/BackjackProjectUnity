@@ -7,21 +7,30 @@ using UnityEngine.UI;
 
 public static class PlayersFields
 {
-    public static List<Text> playerNames { get; private set; }
-    public static List<Text> playersCoins { get; private set; }
-    public static List<Text> playersBets { get; private set; }
-    public static List<Text> playersHandCount { get; private set; }
-    public static List<Text> playersBlackjackBet { get; private set; }
-    public static Text turnText { get; private set; }
+    public static List<Text> PlayerNames { get; private set; }
+    public static List<Text> PlayersCoins { get; private set; }
+    public static List<Text> PlayersBets { get; private set; }
+    public static List<Text> PlayersHandCount { get; private set; }
+    public static List<Text> PlayersBlackjackBet { get; private set; }
+    public static Text TurnText { get; private set; }
+    public static List<GameObject> PlayersCardsPositions { get; private set; }
+    public static List<Transform> DealerPositions { get; private set; }
+    public static Transform DealerLastCardPosition { get; set; }
+    public static List<Transform> PlayersLastCardPosition { get; set; }
+    public static Text CasinoHand { get; set; }
 
     private static void InitializeAttr()
     {
-        playerNames = new List<Text>();
-        playersCoins = new List<Text>(); ;
-        playersBets = new List<Text>();
-        playersHandCount = new List<Text>();
-        playersBlackjackBet = new List<Text>();
-        turnText = GameObject.Find("TurnText").GetComponent<Text>();
+        PlayerNames = new List<Text>();
+        PlayersCoins = new List<Text>(); ;
+        PlayersBets = new List<Text>();
+        PlayersHandCount = new List<Text>();
+        PlayersBlackjackBet = new List<Text>();
+        TurnText = GameObject.Find("TurnText").GetComponent<Text>();
+        PlayersCardsPositions = new List<GameObject>();
+        DealerPositions = new List<Transform>();
+        PlayersLastCardPosition = new List<Transform>();
+        CasinoHand = GameObject.Find("CasinoHand").GetComponent<Text>();
     }
 
     public static void FindFields()
@@ -33,15 +42,24 @@ public static class PlayersFields
         int i = 0;
         while (i < 3)
         {
-            playerNames[i] = GameObject.Find("Player" + (i + 1)).GetComponent<Text>();
-            playersCoins[i] = GameObject.Find("Player" + (i + 1) + "Coins").GetComponent<Text>();
-            playersBets[i] = GameObject.Find("Player" + (i + 1) + "Bet").GetComponent<Text>();
-            playersHandCount[i] = GameObject.Find("Player" + (i + 1) + "Hand").GetComponent<Text>();
-            playersBlackjackBet[i] = GameObject.Find("Player" + (i + 1) + "Blackjack").GetComponent<Text>();
+            PlayerNames[i] = GameObject.Find("Player" + (i + 1)).GetComponent<Text>();
+            PlayersCoins[i] = GameObject.Find("Player" + (i + 1) + "Coins").GetComponent<Text>();
+            PlayersBets[i] = GameObject.Find("Player" + (i + 1) + "Bet").GetComponent<Text>();
+            PlayersHandCount[i] = GameObject.Find("Player" + (i + 1) + "Hand").GetComponent<Text>();
+            PlayersBlackjackBet[i] = GameObject.Find("Player" + (i + 1) + "Blackjack").GetComponent<Text>();
+            PlayersCardsPositions[i] = GameObject.Find("cardFieldPlayer" + (i + 1));
         }
 
+        //find the cards positions for the dealer
+        DealerPositions.Add(GameObject.Find("DealerFieldCard1").GetComponent<Transform>());
+        DealerPositions.Add(GameObject.Find("DealerFieldCard2").GetComponent<Transform>());
+        DealerLastCardPosition = GameObject.Find("DealerFieldCard2").GetComponent<Transform>();
 
-
+        //set the last card position of all the player
+        foreach (GameObject tmpObjectPosition in PlayersCardsPositions)
+        {
+            PlayersLastCardPosition.Add(tmpObjectPosition.transform.GetChild(1));
+        }
     }
 }
 

@@ -113,11 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &12550007 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1469773897}
 --- !u!1 &14698709
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,11 +175,6 @@ Transform:
   m_Father: {fileID: 1246365726}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &26509923 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 1578007229}
 --- !u!1 &31275617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1278,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_LocalScale.z
@@ -1304,7 +1294,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_Name
-      value: cardFieldCenter
+      value: cardFieldPlayer2
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_Layer
@@ -2814,16 +2804,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 612085372e37a124a9a03e08d6eb69bc, type: 2}
   m_IsPrefabAsset: 0
---- !u!4 &463448362 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 463448361}
---- !u!4 &483174752 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 391533886}
 --- !u!1 &492710446
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,7 +4134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 743470496}
   m_Layer: 0
-  m_Name: fieldCard1
+  m_Name: DealerFieldCard1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4167,7 +4147,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 743470495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 4.111111, z: 59.4}
+  m_LocalPosition: {x: -0.1, y: 4.111111, z: 60.9}
   m_LocalScale: {x: 0.38172746, y: 11.111111, z: 18.29286}
   m_Children: []
   m_Father: {fileID: 786892690}
@@ -4289,11 +4269,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d9fd571390e984d8e830787c8e73bc, type: 2}
   m_IsPrefabAsset: 0
---- !u!4 &779511394 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 584387148}
 --- !u!4 &786892690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4511384432126464, guid: 26d9fd571390e984d8e830787c8e73bc,
@@ -5740,7 +5715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082694034}
   m_Layer: 0
-  m_Name: fieldCard2
+  m_Name: DealerFieldCard2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5753,7 +5728,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1082694033}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 4.111111, z: 40}
+  m_LocalPosition: {x: -0.1, y: 4.111111, z: 43.5}
   m_LocalScale: {x: 0.38172746, y: 11.111111, z: 18.29286}
   m_Children: []
   m_Father: {fileID: 786892690}
@@ -5883,7 +5858,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_LocalScale.z
@@ -5899,7 +5874,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_Name
-      value: cardFieldLeft
+      value: cardFieldPlayer1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6610,7 +6585,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_Name
-      value: cardFieldRight
+      value: cardFieldPlayer3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a66fa1f2a638314285e7b8c7b27e503, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8920,28 +8895,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd4bd7acce3a9a4cabc0d0c66bb67d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNames:
-  - {fileID: 662861931}
-  - {fileID: 1918163220}
-  - {fileID: 882001409}
-  playersCoins:
-  - {fileID: 568512575}
-  - {fileID: 2041857834}
-  - {fileID: 1536402039}
-  playersBets:
-  - {fileID: 1175909482}
-  - {fileID: 571290861}
-  - {fileID: 1164807168}
-  playersHandCount:
-  - {fileID: 407887688}
-  - {fileID: 1454764593}
-  - {fileID: 1031039156}
-  - {fileID: 460206567}
-  playersBlackjackBet:
-  - {fileID: 1219380983}
-  - {fileID: 251470758}
-  - {fileID: 1071404908}
-  turnText: {fileID: 1381442833}
   moveSpeed: 20
   fieldsPosition:
   - {fileID: 743470496}
@@ -8953,23 +8906,6 @@ MonoBehaviour:
   - {fileID: 19732561}
   - {fileID: 1420054021}
   cardPrefab: {fileID: 1000012878200392, guid: 04bc3691624d49e479a8a0a7c8cac9fa, type: 2}
-  askForACardButton: {fileID: 1843878586}
-  bet21Button: {fileID: 141097840}
-  doubleBetButton: {fileID: 1903313682}
-  passButton: {fileID: 1470936159}
-  coinsPositions:
-  - {fileID: 483174752}
-  - {fileID: 26509923}
-  - {fileID: 463448362}
-  - {fileID: 2124507747}
-  - {fileID: 779511394}
-  - {fileID: 12550007}
-  coinPrefab_100: {fileID: 1906029614840392, guid: 4bb2fecc2afbb744d89c764565219ca9,
-    type: 2}
-  coinPrefab_500: {fileID: 1574154976669380, guid: c291de8ac4be35547aa0df38a4bf1e9f,
-    type: 2}
-  coinPrefab_1000: {fileID: 1847504348509926, guid: 0fcb208381475fc4297990c24eea8e66,
-    type: 2}
   betReady:
     m_PersistentCalls:
       m_Calls:
@@ -9050,6 +8986,21 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: BlackjckBetReady, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &1740036835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1740036833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7107b625d911614cb51cd21021cda91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  askForACardButton: {fileID: 0}
+  bet21Button: {fileID: 0}
+  doubleBetButton: {fileID: 0}
+  passButton: {fileID: 0}
 --- !u!4 &1740036836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 89793ce4416a95a4e82d3a67c9059619,
@@ -10568,11 +10519,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2115032848}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2124507747 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4292031196015738, guid: 612085372e37a124a9a03e08d6eb69bc,
-    type: 2}
-  m_PrefabInternal: {fileID: 381578419}
 --- !u!1 &2136727175
 GameObject:
   m_ObjectHideFlags: 0

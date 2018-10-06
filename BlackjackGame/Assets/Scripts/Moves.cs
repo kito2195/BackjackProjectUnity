@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,14 @@ using UnityEngine.UI;
 
 class Moves : MonoBehaviour
 {
-    public Button askForACardButton;
-    public Button bet21Button;
-    public Button doubleBetButton;
-    public Button passButton;
+    private Button askForACardButton;
+    private Button bet21Button;
+    private Button doubleBetButton;
+    private Button passButton;
 
     void Start()
     {
-        FindButtons();
+       FindButtons();
     }
 
     private void FindButtons()
@@ -37,7 +38,7 @@ class Moves : MonoBehaviour
     {
         passButton.GetComponent<Button>().interactable = true;
         askForACardButton.GetComponent<Button>().interactable = true;
-        int playerCoinsLeft = int.Parse(PlayersFields.playersCoins[Player.PlayerPosition].text);
+        int playerCoinsLeft = int.Parse(PlayersFields.PlayersCoins[Player.PlayerPosition].text);
         int playerBet = Player.CoinsInGame;
 
         if (playerCoinsLeft >= playerBet)
@@ -54,13 +55,31 @@ class Moves : MonoBehaviour
         }
     }
 
-    private void deactivateButtons()
+    private void DeactivateButtons()
     {
         askForACardButton.GetComponent<Button>().interactable = false;
         doubleBetButton.GetComponent<Button>().interactable = false;
         passButton.GetComponent<Button>().interactable = false;
         bet21Button.GetComponent<Button>().interactable = false;
     }
+
+    //Doubles de bet of the player and changes the turn
+    public void DoubleBet(int player, string card)
+    {
+        int bet = getPlayerBet(player);
+        bet = bet * 2;
+        this.playersBets[player].text = "Bet: " + bet.ToString();
+        RecieveExtraCard(player, card, false);
+        if (this.currentPlayerPosition == player)
+        {
+            int currentCoins = int.Parse(this.playersCoins[player].text);
+            currentCoins = currentCoins - (bet / 2);
+            this.playersCoins[player].text = currentCoins.ToString();
+        }
+        DeactivateButtons();
+    }
+
+    
 
     //Asks the server for an extra card  
     void AskForExtraCard()
@@ -72,9 +91,9 @@ class Moves : MonoBehaviour
      * This method lets one player to bet that the house or casino has blackjack in its initial hand
      * This method is only allowed when the face up card of the house is a 10, J, Q, K or an A
      */
-    public void BetFor21()
+   public void BetFor21()
     {
-        hideBlackjackBetWindow = false;
+        hideBlackjackBetWindow = true;
     }
 
     //Asks the server for a new card, double the bet and pass the turn
@@ -85,10 +104,8 @@ class Moves : MonoBehaviour
 
     public void PassTurn()
     {
-        deactivateButtons();
+        DeactivateButtons();
         this.passTurnEvent.Invoke();
     }
-
-
 }
 

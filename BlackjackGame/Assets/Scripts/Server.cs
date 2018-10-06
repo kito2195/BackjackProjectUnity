@@ -206,6 +206,7 @@ public class Server : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         List<string> data = new List<string>();
+        //4 = initial cards
         data.Add("4");
         //to put 8 cards into a list and send it to the clients
         for (int i = 0; i < 8; i++)
